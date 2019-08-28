@@ -11,9 +11,9 @@
 //	polygon   #
 //	line      -
 
-class point{
+class shape{
 public:
-    explicit point(int x=0,int y=0){
+    explicit shape(int x=0,int y=0){
         this->x = x;
         this->y = y;
     }
@@ -29,7 +29,7 @@ public:
     virtual void info(){
         std::cout << "("  << getX() << ", " << getY() << ") ";
     }
-    ~point(){ std::cout << "object deleted" << std::endl;
+    ~shape(){ std::cout << "object deleted" << std::endl;
 
     }
 private:
@@ -39,9 +39,9 @@ private:
 
 };
 
-class elipse : public point{
+class elipse : public shape{
 public:
-    explicit elipse(int x=0, int y=0, int xRadius=0,int yRadius=0) : point(x,y){
+    explicit elipse(int x=0, int y=0, int xRadius=0,int yRadius=0) : shape(x,y){
         this->xRadius = xRadius;
         this->yRadius = yRadius;
         setSymbol('*');
@@ -61,9 +61,9 @@ private:
 
 };
 
-class polygon : public point{
+class polygon : public shape{
 public:
-    explicit polygon(int x=0, int y=0, int n=0, int l=0) : point(x,y){
+    explicit polygon(int x=0, int y=0, int n=0, int l=0) : shape(x,y){
         this->n = n;
         this->l = l;
         setSymbol('#');
@@ -83,9 +83,9 @@ private:
     int l;
 };
 
-class line : public point{
+class line : public shape{
 public:
-    explicit line(int x=0, int y=0, int x2=0, int y2=0) : point(x,y){
+    explicit line(int x=0, int y=0, int x2=0, int y2=0) : shape(x,y){
         this->x2 = x2;
         this->y2 = y2;
     }
