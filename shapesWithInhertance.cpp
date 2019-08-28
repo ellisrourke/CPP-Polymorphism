@@ -29,9 +29,7 @@ public:
     virtual void info(){
         std::cout << "("  << getX() << ", " << getY() << ") ";
     }
-    ~shape(){ std::cout << "object deleted" << std::endl;
-
-    }
+    //~shape(){ std::cout << "object deleted" << std::endl;}
 private:
     int x;
     int y;

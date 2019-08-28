@@ -15,7 +15,7 @@ public:
 
     classType &operator[](int i){return list[i];}
 
-    void push(classType &x){
+    void push(classType x){
         items+=1;
         list[items - 1] = x;
         //std::cout << this->items << std::endl;
