@@ -15,9 +15,9 @@ public:
 
     classType &operator[](int i){return list[i];}
 
-    void push(classType x){
+    void push(classType cl){
         items+=1;
-        list[items - 1] = x;
+        list[items - 1] = cl;
         //std::cout << this->items << std::endl;
     };
 
@@ -35,22 +35,34 @@ public:
     //not working
     void remove(){
         items-=1;
-        items[list] = classType();
+        list[items] = classType();
     }
 
-    void addFromFile(std::string const& infile){
-        std::ifstream fin;
-        std::string line;
-        fin.open(infile);
-        std::cout << "test" << std::endl;
+    void addFromFile(std::string const & filename,Bunch<shape *> & bunch){
+        std::ifstream infile;
+        std::string inLine;
+        infile.open("shapeTextFiles/" + filename);
 
-        while (fin) {
-            // Read a Line from File
-            getline(fin, line);
-            // Print line in Console
-            std::cout << line << std::endl;
+        if (!infile.is_open()) {
+            std::cerr << "File does not exist, loading data failed!" << std::endl;
+            return;
         }
 
+        while (infile) {
+            // Read a Line from File
+            getline(infile, inLine, ' ');
+            if(inLine == "point"){
+                std::cout << "point";
+                int x,y;
+                infile >> x >> y;
+                bunch.push(new shape(x,y));
+            } else {
+                int x,y,a,b;
+                if(inLine == "elipse"){infile >> x >> y >> a >> b; bunch.push(new elipse(x,y,a,b));}
+                else if(inLine == "polygon"){infile >> x >> y >> a >> b; bunch.push(new polygon(x,y,a,b));}
+                else if(inLine == "line"){infile >> x >> y >> a >> b; bunch.push(new line(x,y,a,b));}
+            }
+        }
     }
 
 };

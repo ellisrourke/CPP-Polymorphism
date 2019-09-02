@@ -11,9 +11,13 @@ int main(){
     myscreen.axes('+');
     Bunch<shape *> bunch;
 
-    bunch.addFromFile("shapeTextFiles/myShapes.txt");
+    bunch.addFromFile("myShapes.txt",bunch);
 
-
+    for(int i=0;i<bunch.items;i++){
+        std::cout << i << " " << bunch[i]->getType() << " ";
+        bunch[i]->info();
+        std::cout<< " " <<std::endl;
+    }
 
 
 
