@@ -9,15 +9,15 @@
 int main(){
     Screen myscreen;
     Bunch<shape*> bunch;
-
+    elipse e;
     shape p(1, 2);
-    elipse e(5,5,10,10);
+
 
     bunch.push(&p);
     bunch.push(&e);
 
     for(int i=0;i<bunch.items;i++){
-        bunch[i]->draw(myscreen);
+        bunch[i]->info();
     }
     myscreen.display();
 
