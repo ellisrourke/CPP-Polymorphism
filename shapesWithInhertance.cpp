@@ -12,6 +12,7 @@ public:
     explicit shape(int x=0,int y=0){
         this->x = x;
         this->y = y;
+
     }
     //copy constructor
     shape(shape const & that) : shape(that.x, that.y){}
@@ -38,7 +39,6 @@ public:
         that.y = 0;
         return *this;
     }
-
     //destructor
     ~shape() = default;
 
@@ -46,11 +46,8 @@ public:
     int getY(){ return y;};
     char getSymbol(){ return symbol;};
     void setSymbol(char s){ this->symbol = s; }
-
-    virtual void draw(Screen & scr){
-        scr.point(x,y,'x');
-    }
-
+    virtual std::string getType(){ return type;};
+    virtual void draw(Screen & scr){scr.point(x,y,symbol);}
     virtual void info(){
         std::cout << "("  << getX() << ", " << getY() << ") ";
     }
@@ -58,7 +55,8 @@ public:
 protected:
     int x;
     int y;
-    char symbol = '$';
+    char symbol = 'x';
+    std::string type = "point";
 
 };
 
@@ -67,7 +65,6 @@ public:
     explicit elipse(int x=0, int y=0, int xRadius=0,int yRadius=0) : shape(x,y){
         this->xRadius = xRadius;
         this->yRadius = yRadius;
-        setSymbol('*');
     }
     //copy constructor
     elipse(elipse const & that) : elipse(that.x, that.y, that.xRadius, that.yRadius){}
@@ -107,19 +104,21 @@ public:
         return *this;
     }
     //destructor
-
+    ~elipse() = default;
     int getXradius(){ return xRadius; }
     int getYradius(){ return yRadius; }
     void  draw(Screen & scr) override {
         scr.ellipse(getX(),getY(),xRadius,yRadius,'*');
     }
-
     void info() override {
         std::cout << "(" << getX() << ", " << getY() << ", " << getXradius() << ", " << getYradius() << ") ";
     }
+    std::string getType() override { return type;}
 private:
     int xRadius;
     int yRadius;
+    char symbol = '*';
+    std::string type = "elipse";
 
 };
 
@@ -128,7 +127,6 @@ public:
     explicit polygon(int x=0, int y=0, int n=0, int l=0) : shape(x,y){
         this->n = n;
         this->l = l;
-        setSymbol('#');
     }
     //copy constructor
     polygon(polygon const & that) : polygon(that.x, that.y, that.n, that.l){}
@@ -175,14 +173,17 @@ public:
     void  draw(Screen & scr) override {
         scr.polygon(getX(),getY(),n,l,'#');
     }
-
     void info() override {
         std::cout << "(" << getX() << ", " << getY() << ", " << getSides() << ", " << getLength() << ") ";
     }
+    std::string getType() override { return type;}
 
 private:
     int n;
     int l;
+    char symbol = '#';
+    std::string type = "polygon";
+
 };
 
 class line : public shape{
@@ -190,6 +191,7 @@ public:
     explicit line(int x=0, int y=0, int x2=0, int y2=0) : shape(x,y){
         this->x2 = x2;
         this->y2 = y2;
+        this->type = "line";
     }
     //copy constructor
     line(line const & that) : line(that.x, that.y, that.x2, that.y2){}
@@ -238,13 +240,15 @@ public:
     void draw(Screen & scr) override {
         scr.line(getX(),getY(),x2,y2,'-');
     }
-
     void info() override {
         std::cout << "(" << getX() << ", " << getY() << ", " << getx2() << ", " << gety2() << ") ";
     }
+    std::string getType() override { return type;}
+
 private:
     int x2;
     int y2;
+    char symbol = '-';
 };
 
 #endif //GEOMETRICSHAPES_SHAPE_H
