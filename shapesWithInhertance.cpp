@@ -2,6 +2,7 @@
 #define GEOMETRICSHAPES_SHAPE_H
 #include <iostream>
 #include "screen.h"
+#include <sstream>
 //	point     $
 //	elliplse  *
 //	polygon   #
@@ -48,8 +49,11 @@ public:
     void setSymbol(char s){ this->symbol = s; }
     virtual std::string getType(){ return type;};
     virtual void draw(Screen & scr){scr.point(x,y,symbol);}
-    virtual void info(){
-        std::cout << "("  << getX() << ", " << getY() << ") ";
+    virtual std::string info(){
+        std::stringstream data;
+        data<< getType() << " " << getX() << " " << getY();
+        std::string out = data.str();
+        return out;
     }
 
 protected:
@@ -110,8 +114,12 @@ public:
     void  draw(Screen & scr) override {
         scr.ellipse(getX(),getY(),xRadius,yRadius,'*');
     }
-    void info() override {
-        std::cout << "(" << getX() << ", " << getY() << ", " << getXradius() << ", " << getYradius() << ") ";
+
+    std::string info() override {
+        std::stringstream data;
+        data<< getType() << " " << getX() << " " << getY() << " " << getXradius() << " " << getYradius();
+        std::string out = data.str();
+        return out;
     }
     std::string getType() override { return type;}
 private:
@@ -173,9 +181,14 @@ public:
     void  draw(Screen & scr) override {
         scr.polygon(getX(),getY(),n,l,'#');
     }
-    void info() override {
-        std::cout << "(" << getX() << ", " << getY() << ", " << getSides() << ", " << getLength() << ") ";
+
+    std::string info() override {
+        std::stringstream data;
+        data<< getType() << " " << getX() << " " << getY() << " " << getSides() << " " << getLength();
+        std::string out = data.str();
+        return out;
     }
+
     std::string getType() override { return type;}
 
 private:
@@ -240,8 +253,12 @@ public:
     void draw(Screen & scr) override {
         scr.line(getX(),getY(),x2,y2,'-');
     }
-    void info() override {
-        std::cout << "(" << getX() << ", " << getY() << ", " << getx2() << ", " << gety2() << ") ";
+
+    std::string info() override {
+        std::stringstream data;
+        data << getType()  << " " << getX() << " " << getY() << " " << getx2() << " " << gety2();
+        std::string out = data.str();
+        return out;
     }
     std::string getType() override { return type;}
 

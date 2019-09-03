@@ -1,4 +1,5 @@
 point 1 2
+point 1 4
 elipse 5 5 5 5
 polygon 10 -10 4 3
-line -5 -5 5 5
+line 2 4 5 6

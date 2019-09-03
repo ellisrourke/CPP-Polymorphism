@@ -12,23 +12,14 @@ int main(){
     Bunch<shape *> bunch;
 
     bunch.addFromFile("myShapes.txt",bunch);
+    bunch.saveToFile(bunch);
 
-    for(int i=0;i<bunch.items;i++){
-        std::cout << i << " " << bunch[i]->getType() << " ";
-        bunch[i]->info();
-        std::cout<< " " <<std::endl;
-    }
-
-
-
-
-/*
     int select = 0;
-    std::cout << "1: draw point\n2: draw elipse \n3: draw polygon\n4: draw line\n5: show info\n6: display shape\n7: clear screen\n-1: exit\n";
-    std::cout << "enter selection: ";
 
-
+    std::cout << "1: draw point\n2: draw elipse \n3: draw polygon\n4: draw line\n5: show info\n6: display shape\n7: clear screen\n8: read shapes from file\n";
+/*
     while(select!=-1){
+        std::cout << "enter selection: ";
         std::cin >> select;
         switch(select){
             case 1 : { //add a point to bunch
@@ -103,12 +94,20 @@ int main(){
                 myscreen.clear();
                 myscreen.display();
                 break;
+            } case 8 : {// add shapes from file to bunch
+                std::string filepath;
+                std::cout << "enter filename: ";
+                std::cin >> filepath;
+
+                bunch.addFromFile(filepath,bunch);
+
+
             }
             default:{break;}
         }
     }
-
 */
+
 
 
 

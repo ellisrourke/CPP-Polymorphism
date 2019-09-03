@@ -48,21 +48,33 @@ public:
             return;
         }
 
-        while (infile) {
+        while (!infile.eof()) {
             // Read a Line from File
             getline(infile, inLine, ' ');
-            if(inLine == "point"){
-                std::cout << "point";
+            //std::cout << inLine << std::endl;
+
+            if(inLine.find("point") != std::string::npos){
+                //std::cout << "point";
                 int x,y;
                 infile >> x >> y;
                 bunch.push(new shape(x,y));
             } else {
                 int x,y,a,b;
-                if(inLine == "elipse"){infile >> x >> y >> a >> b; bunch.push(new elipse(x,y,a,b));}
-                else if(inLine == "polygon"){infile >> x >> y >> a >> b; bunch.push(new polygon(x,y,a,b));}
-                else if(inLine == "line"){infile >> x >> y >> a >> b; bunch.push(new line(x,y,a,b));}
+                if(inLine.find("elipse") != std::string::npos){infile >> x >> y >> a >> b; bunch.push(new elipse(x,y,a,b));}
+                else if(inLine.find("polygon") != std::string::npos){infile >> x >> y >> a >> b; bunch.push(new polygon(x,y,a,b));}
+                else if(inLine.find("line") != std::string::npos){infile >> x >> y >> a >> b; bunch.push(new line(x,y,a,b));}
             }
         }
+        infile.close();
     }
 
+    void saveToFile(Bunch<shape *> & bunch){
+        std::ofstream outFile;
+        outFile.open("shapeTextFiles/savedShapes.txt");
+        for(int i=0;i<bunch.items;i++){
+                outFile << bunch[i]->info() << std::endl;
+
+        }
+
+    }
 };
