@@ -1,0 +1,4 @@
+elipse 0 0 3 3
+elipse -10 10 6 6
+elipse 10 10 6 6
+elipse 0 -15 15 3

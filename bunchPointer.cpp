@@ -34,8 +34,10 @@ public:
 
     //not working
     void remove(){
-        items-=1;
-        list[items] = classType();
+        if(items > 0) {
+            items -= 1;
+            list[items] = classType();
+        }
     }
 
     void addFromFile(std::string const & filename,Bunch<shape *> & bunch){
@@ -70,11 +72,13 @@ public:
 
     void saveToFile(Bunch<shape *> & bunch){
         std::ofstream outFile;
-        outFile.open("shapeTextFiles/savedShapes.txt");
+        std::string filename;
+        std::cout << "input file name: ";
+        std::cin >> filename;
+        outFile.open("shapeTextFiles/" + filename);
         for(int i=0;i<bunch.items;i++){
                 outFile << bunch[i]->info() << std::endl;
-
         }
-
+        outFile.close();
     }
 };

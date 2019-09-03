@@ -11,15 +11,15 @@ int main(){
     myscreen.axes('+');
     Bunch<shape *> bunch;
 
-    bunch.addFromFile("myShapes.txt",bunch);
-    bunch.saveToFile(bunch);
+    //bunch.addFromFile("myShapes.txt",bunch);
+    //bunch.saveToFile(bunch);
 
     int select = 0;
 
-    std::cout << "1: draw point\n2: draw elipse \n3: draw polygon\n4: draw line\n5: show info\n6: display shape\n7: clear screen\n8: read shapes from file\n";
-/*
+    std::cout << "1: draw point\n2: draw elipse \n3: draw polygon\n4: draw line\n5: show info\n6: display shape\n7: clear screen\n8: read shapes from file\n9: save to file\n10: pop shape\n";
+
     while(select!=-1){
-        std::cout << "enter selection: ";
+        std::cout << "-> ";
         std::cin >> select;
         switch(select){
             case 1 : { //add a point to bunch
@@ -73,8 +73,7 @@ int main(){
             }
             case 5 : { //display shape index ,type and parameters
                 for(int i=0;i<bunch.items;i++){
-                    std::cout << i << " " << bunch[i]->getType() << " ";
-                    bunch[i]->info();
+                    std::cout << bunch[i]->info();
                     std::cout<< " " <<std::endl;
                 }
                 break;
@@ -98,15 +97,19 @@ int main(){
                 std::string filepath;
                 std::cout << "enter filename: ";
                 std::cin >> filepath;
-
                 bunch.addFromFile(filepath,bunch);
-
-
+                break;
+            } case 9 : {//save bunch to file
+                bunch.saveToFile(bunch);
+                break;
+            } case 10 : {
+                bunch.remove();
+                break;
             }
             default:{break;}
         }
     }
-*/
+
 
 
 
