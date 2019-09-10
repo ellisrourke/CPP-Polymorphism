@@ -28,7 +28,8 @@ int main(){
                 std::cin >> x;
                 std::cout << "enter Y:";
                 std::cin >> y;
-                bunch.push(new point(x,y));
+                shape *p = new point(x,y);
+                bunch.push(p);
                 break;
             }
             case 2 : { //add an elipse to bunch
@@ -41,7 +42,8 @@ int main(){
                 std::cin >> xR;
                 std::cout << "enter Y radius:";
                 std::cin >> yR;
-                bunch.push(new elipse(x,y,xR,yR));
+                shape *e = new elipse(x,y,xR,yR);
+                bunch.push(e);
                 break;
             }
             case 3 : { // add a polygon to polygon bunch
@@ -54,7 +56,8 @@ int main(){
                 std::cin >> n;
                 std::cout << "enter side length:";
                 std::cin >> l;
-                bunch.push(new polygon(x,y,n,l));
+                shape *pol = new polygon(x,y,n,l);
+                bunch.push(pol);
                 break;
             }
             case 4 : { //add a line to line bunch
@@ -68,7 +71,8 @@ int main(){
                 std::cout << "enter Y2:";
                 std::cin >> y2;
 
-                bunch.push(new line(x,y,x2,y2));
+                shape *l = new line(x,y,x2,y2);
+                bunch.push(l);
                 break;
             }
             case 5 : { //display shape index ,type and parameters
