@@ -59,7 +59,7 @@ public:
                 //std::cout << "point";
                 int x,y;
                 infile >> x >> y;
-                bunch.push(new shape(x,y));
+                bunch.push(new point(x,y));
             } else {
                 int x,y,a,b;
                 if(inLine.find("elipse") != std::string::npos){infile >> x >> y >> a >> b; bunch.push(new elipse(x,y,a,b));}

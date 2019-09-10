@@ -28,7 +28,7 @@ int main(){
                 std::cin >> x;
                 std::cout << "enter Y:";
                 std::cin >> y;
-                bunch.push(new shape(x,y));
+                bunch.push(new point(x,y));
                 break;
             }
             case 2 : { //add an elipse to bunch
@@ -109,11 +109,4 @@ int main(){
             default:{break;}
         }
     }
-
-
-
-
-
-
-
 }

@@ -7,25 +7,37 @@
 //	elliplse  *
 //	polygon   #
 //	line      -
-
 class shape{
 public:
-    explicit shape(int x=0,int y=0){
+    explicit shape(int x=0, int y=0){this->x = x; this->y = y;}
+    int x,y;
+    int getX(){ return this->x;}
+    int getY(){ return this->y;}
+    std::string getType(){ return this->type;}
+    virtual void draw(Screen & scr) = 0;
+    virtual std::string info() = 0;
+    std::string type;
+};
+
+
+class point : public shape{
+public:
+    explicit point(int x=0 , int y=0) : shape(x,y){
         this->x = x;
         this->y = y;
 
     }
     //copy constructor
-    shape(shape const & that) : shape(that.x, that.y){}
+    point(point const & that) : point(that.x, that.y){}
     //move constructor
-    shape(shape && that) noexcept{
+    point(point && that) noexcept{
         this->x = that.x;
         this->y = that.y;
         that.x =0;
         that.y=0;
     }
     //copy assignment
-    shape &operator = (shape const & that){
+    point &operator = (point const & that){
         if(this != &that){
             x = that.x;
             y = that.y;
@@ -33,7 +45,7 @@ public:
         return *this;
     }
     //move assignment
-    shape &operator = (shape && that) noexcept {
+    point &operator = (point && that) noexcept {
         x = that.x;
         y = that.y;
         that.x = 0;
@@ -41,15 +53,13 @@ public:
         return *this;
     }
     //destructor
-    ~shape() = default;
+    ~point() = default;
 
-    int getX(){ return x;};
-    int getY(){ return y;};
     char getSymbol(){ return symbol;};
     void setSymbol(char s){ this->symbol = s; }
-    virtual std::string getType(){ return type;};
-    virtual void draw(Screen & scr){scr.point(x,y,symbol);}
-    virtual std::string info(){
+    std::string getType(){ return type;};
+    void draw(Screen & scr) override {scr.point(x,y,symbol);}
+    std::string info() override {
         std::stringstream data;
         data<< getType() << " " << getX() << " " << getY();
         std::string out = data.str();
@@ -111,7 +121,7 @@ public:
     ~elipse() = default;
     int getXradius(){ return xRadius; }
     int getYradius(){ return yRadius; }
-    void  draw(Screen & scr) override {
+    void draw(Screen & scr) override {
         scr.ellipse(getX(),getY(),xRadius,yRadius,'*');
     }
 
@@ -121,7 +131,6 @@ public:
         std::string out = data.str();
         return out;
     }
-    std::string getType() override { return type;}
 private:
     int xRadius;
     int yRadius;
@@ -188,8 +197,6 @@ public:
         std::string out = data.str();
         return out;
     }
-
-    std::string getType() override { return type;}
 
 private:
     int n;
@@ -260,7 +267,6 @@ public:
         std::string out = data.str();
         return out;
     }
-    std::string getType() override { return type;}
 
 private:
     int x2;
