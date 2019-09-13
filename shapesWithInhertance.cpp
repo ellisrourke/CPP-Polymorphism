@@ -13,7 +13,7 @@ public:
     int x,y;
     int getX(){ return this->x;}
     int getY(){ return this->y;}
-    std::string getType(){ return this->type;}
+    virtual std::string getType(){ return this->type;}
     virtual void draw(Screen & scr) = 0;
     virtual std::string info() = 0;
     std::string type;
@@ -57,7 +57,7 @@ public:
 
     char getSymbol(){ return symbol;};
     void setSymbol(char s){ this->symbol = s; }
-    std::string getType(){ return type;};
+    std::string getType() override { return this->type;}
     void draw(Screen & scr) override {scr.point(x,y,symbol);}
     std::string info() override {
         std::stringstream data;
@@ -121,6 +121,7 @@ public:
     ~elipse() = default;
     int getXradius(){ return xRadius; }
     int getYradius(){ return yRadius; }
+    std::string getType() override { return this->type;}
     void draw(Screen & scr) override {
         scr.ellipse(getX(),getY(),xRadius,yRadius,'*');
     }
@@ -187,6 +188,7 @@ public:
 
     int getSides(){ return n; }
     int getLength(){ return l; }
+    std::string getType() override { return this->type;}
     void  draw(Screen & scr) override {
         scr.polygon(getX(),getY(),n,l,'#');
     }

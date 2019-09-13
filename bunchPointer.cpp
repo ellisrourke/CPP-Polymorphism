@@ -32,7 +32,6 @@ public:
         std::cout << std::endl;
     }
 
-    //not working
     void remove(){
         if(items > 0) {
             items -= 1;
